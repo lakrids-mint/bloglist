@@ -49,7 +49,7 @@ export const createBlog = blogObject => {
 export const deleteBlog = id => {
   console.log("delete blog");
   return async dispatch => {
-    const deletedBlog = await blogService.deleteBlog(id);
+    await blogService.deleteBlog(id);
     dispatch({
       type: "DELETE_BLOG",
       data: id

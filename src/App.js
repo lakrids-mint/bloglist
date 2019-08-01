@@ -4,7 +4,6 @@ import blogService from "./services/blogs";
 import LoginForm from "./components/LoginForm";
 import Togglable from "./components/Togglable";
 import { useField } from "./hooks/index";
-import store from "./store";
 import { initializeBlogs } from "./reducers/blogsReducer";
 import NewBlog from "./components/NewBlog";
 import Blogs from "./components/Blogs";
@@ -12,10 +11,10 @@ import { connect } from "react-redux";
 import Notification from "./components/Notification";
 
 const App = props => {
-  console.log("from APP: store: ", store.getState().blogs);
   const username = useField("text");
   const password = useField("password");
   const [user, setUser] = useState(null);
+
   const blogFormRef = React.createRef();
 
   useEffect(() => {

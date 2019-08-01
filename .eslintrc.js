@@ -15,10 +15,10 @@ module.exports = {
   plugins: ["react", "jest", "react-hooks"],
   rules: {
     "react-hooks/rules-of-hooks": "error",
-    indent: ["error", 2],
+    indent: ["error", 2, { SwitchCase: 1 }],
     "linebreak-style": ["error", "windows"],
-    quotes: ["error", "souble"],
-    semi: ["error", "never"],
+    quotes: ["error", "double"],
+    semi: ["error", "always"],
     eqeqeq: "error",
     "no-trailing-spaces": "error",
     "object-curly-spacing": ["error", "always"],
