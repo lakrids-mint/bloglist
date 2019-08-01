@@ -17,7 +17,7 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     indent: ["error", 2],
     "linebreak-style": ["error", "windows"],
-    quotes: ["error", "single"],
+    quotes: ["error", "souble"],
     semi: ["error", "never"],
     eqeqeq: "error",
     "no-trailing-spaces": "error",

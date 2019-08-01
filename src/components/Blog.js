@@ -2,12 +2,12 @@ import React from "react";
 
 const Blog = ({ blog, deleteBlog, updateLike }) => {
   return (
-    <div>
-      {blog.title}
+    <li>
+      {blog.title} ||
       {blog.likes}
-      <button onClick={() => deleteBlog(blog.id)}>Delete</button>
-      <button onClick={() => updateLike(blog.id)}>Like</button>
-    </div>
+      <button onClick={deleteBlog}>Delete</button>
+      <button onClick={updateLike}>Like</button>
+    </li>
   );
 };
 
