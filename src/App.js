@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import loginService from "./services/login";
 import blogService from "./services/blogs";
 import LoginForm from "./components/LoginForm";
@@ -78,6 +78,7 @@ const App = props => {
 
   return <div>{props.user === null ? loginForm() : loggedIn()}</div>;
 };
+
 const mapStateToProps = state => {
   return {
     user: state.user
