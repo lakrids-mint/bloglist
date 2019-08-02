@@ -1,6 +1,6 @@
 import blogService from "../services/blogs";
 
-const reducer = (state = [], action) => {
+const blogsReducer = (state = [], action) => {
   switch (action.type) {
     case "INIT_BLOGS":
       return action.data;
@@ -48,13 +48,16 @@ export const createBlog = blogObject => {
 
 export const deleteBlog = id => {
   console.log("delete blog");
-  return async dispatch => {
-    await blogService.deleteBlog(id);
-    dispatch({
-      type: "DELETE_BLOG",
-      data: id
-    });
-  };
+  const result = window.confirm("Are you sure???");
+  if (result) {
+    return async dispatch => {
+      await blogService.deleteBlog(id);
+      dispatch({
+        type: "DELETE_BLOG",
+        data: id
+      });
+    };
+  }
 };
 
 export const updateLike = blog => {
@@ -69,4 +72,4 @@ export const updateLike = blog => {
   };
 };
 
-export default reducer;
+export default blogsReducer;

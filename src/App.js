@@ -5,15 +5,16 @@ import LoginForm from "./components/LoginForm";
 import Togglable from "./components/Togglable";
 import { useField } from "./hooks/index";
 import { initializeBlogs } from "./reducers/blogsReducer";
+import { setUser, initUser } from "./reducers/userReducer";
 import NewBlog from "./components/NewBlog";
 import Blogs from "./components/Blogs";
 import { connect } from "react-redux";
 import Notification from "./components/Notification";
 
 const App = props => {
+  console.log("get state user from app", props.user);
   const username = useField("text");
   const password = useField("password");
-  const [user, setUser] = useState(null);
 
   const blogFormRef = React.createRef();
 
@@ -21,30 +22,22 @@ const App = props => {
     props.initializeBlogs();
   }, []);
 
-  //Gets user from localstorage
+  //Gets user from localstorage if
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggeBlogAppUser");
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
-      console.log(user.token);
-    }
+    props.initUser();
   }, []);
 
   const handleLogin = async event => {
     event.preventDefault();
-    console.log(username, password);
     try {
       const user = await loginService.login({
         username: username.value,
         password: password.value
       });
-      console.log("user");
       blogService.setToken(user.token);
-
       window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user));
       console.log(user.name, "logged in");
-      setUser(user);
+      props.setUser(user);
       //clear form
     } catch (e) {
       console.log(e);
@@ -52,10 +45,11 @@ const App = props => {
   };
   const handleLogout = () => {
     window.localStorage.removeItem("loggedBlogAppUser");
-    setUser(null);
+    props.setUser(null);
     //clear form
-    console.log(`${user.username} logged out`);
+    console.log(`${props.user.username} logged out`);
   };
+
   const loginForm = () => {
     return (
       <LoginForm
@@ -70,7 +64,8 @@ const App = props => {
       <Notification />
       <h1>Blogs</h1>
       <p>
-        {user.name} {user.username} is logged in{" "}
+        {console.log("props", props)}
+        {props.user.name} {props.user.username} is logged in{" "}
         <button onClick={() => handleLogout()}>Logout!</button>
       </p>
 
@@ -81,10 +76,19 @@ const App = props => {
     </div>
   );
 
-  return <div>{user === null ? loginForm() : loggedIn()}</div>;
+  return <div>{props.user === null ? loginForm() : loggedIn()}</div>;
 };
-
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+const mapDispatchToProps = {
+  initializeBlogs,
+  setUser,
+  initUser
+};
 export default connect(
-  null,
-  { initializeBlogs }
+  mapStateToProps,
+  mapDispatchToProps
 )(App);
