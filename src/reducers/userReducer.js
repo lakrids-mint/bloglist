@@ -4,6 +4,7 @@ const userReducer = (state = null, action) => {
       console.log("this is the user state", action.data);
       return action.data;
     case "INIT_USER":
+      console.log("init user from reducer");
       return action.data;
     default:
       return state;

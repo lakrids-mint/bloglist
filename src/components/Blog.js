@@ -1,14 +1,6 @@
 import React from "react";
 
-const Blog = ({ blog, deleteBlog, updateLike }) => {
-  return (
-    <li>
-      {blog.title} ||
-      {blog.likes}
-      <button onClick={deleteBlog}>Delete</button>
-      <button onClick={updateLike}>Like</button>
-    </li>
-  );
+const Blog = props => {
+  return <div>{props.blog}</div>;
 };
-
 export default Blog;
