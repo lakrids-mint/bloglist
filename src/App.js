@@ -7,6 +7,8 @@ import { setUser, initUser } from "./reducers/userReducer";
 
 import Menu from "./components/Menu";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
+
 import Signup from "./components/Signup";
 
 import UserView from "./views/UserView";
@@ -43,6 +45,8 @@ const App = props => {
             render={({ match }) => <Blog blog={blogById(match.params.id)} />}
           />
           <Route path="/signup" render={() => <Signup />} />
+          <Route path="/logout" render={() => <Logout />} />
+
           <Route path="/login" render={() => <Login />} />
         </Switch>
       </BrowserRouter>

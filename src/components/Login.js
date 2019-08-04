@@ -67,7 +67,6 @@ const Login = props => {
     </div>
   );
 };
-//export default compose( withRouter, connect(mapStateToProps, mapDispatchToProps) )(App);
 const mapStateToProps = state => {
   return {
     user: state.user
