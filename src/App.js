@@ -33,26 +33,36 @@ const App = props => {
   useEffect(() => {
     props.initUser();
   }, []);
-  const blogById = id => {
-    props.blogs.find(blog => blog.id === Number(id));
+
+  //helper methods
+  const blogById = blogid => {
+    const blog = props.blogs.find(blog => blog.id === blogid);
+    console.log(blog);
+    return blog;
   };
 
-  const userById = id => {
-    props.users.find(user => user.id === Number(id));
+  const userById = userid => {
+    const user = props.users.find(user => user.id === userid);
+    return user;
   };
+
+  /* const findUserByBlogId = blogId => {
+    return user;
+  };
+ */
   return (
     <div className="App">
       <BrowserRouter>
         <Menu />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
-          <Route path="/users" render={() => <UserView />} />
+          <Route exact path="/users" render={() => <UserView />} />
           <Route
             exact
             path="/users/:id"
             render={({ match }) => <User user={userById(match.params.id)} />}
           />
-          <Route path="/blogs" render={() => <BlogsView />} />
+          <Route exact path="/blogs" render={() => <BlogsView />} />
           <Route
             exact
             path="/blogs/:id"

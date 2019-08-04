@@ -7,8 +7,8 @@ const Home = () => {
   console.log(store.getState());
 
   return (
-    <div>
-      <h1>Home, splash page!</h1>
+    <div className="container">
+      <h1>Blog app</h1>
       <NewBlog />
       <Blogs />
     </div>

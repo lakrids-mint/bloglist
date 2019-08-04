@@ -6,7 +6,6 @@ import { deleteBlog, updateLike } from "../reducers/blogsReducer";
 const Blogs = props => {
   return (
     <div>
-      <h1>Blogs</h1>
       <ul>
         {props.blogs.map(blog => (
           <li key={blog.id}>

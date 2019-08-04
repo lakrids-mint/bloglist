@@ -24,21 +24,25 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container">
-      <div>
-        Name
-        <input name="name" {...username} />
-      </div>
-      <div>
+    <div className="container">
+      <h1 className="center">Sign up for our wonderful service </h1>
+      <h3 className="center">- it's almost free!</h3>
+      <form onSubmit={handleSubmit} className="container">
         <div>
-          Username
-          <input name="username" {...name} />
+          Name
+          <input name="name" {...username} />
         </div>
-        Password
-        <input name="password" {...password} />
-      </div>
-      <button type="submit">Sign up</button>
-    </form>
+        <div>
+          <div>
+            Username
+            <input name="username" {...name} />
+          </div>
+          Password
+          <input name="password" {...password} />
+        </div>
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
   );
 };
 Signup.propTypes = {};

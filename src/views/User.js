@@ -1,10 +1,23 @@
 import React from "react";
 
-const User = props => {
-  console.log(props);
+const User = ({ user }) => {
+  if (user === undefined) {
+    return <p>nothing to show yet...loading...</p>;
+  }
   return (
     <div>
-      <p>{props.user.name}</p>
+      <h1>
+        {user.name} {user.username}
+      </h1>
+      <h2>Added blogs</h2>
+      <ul>
+        {user.blogs.map(blog => (
+          <li key={blog.id}>
+            <span>{blog.title}---></span>
+            <span>Likes: {blog.likes}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
