@@ -28,16 +28,10 @@ const Login = props => {
       console.log("user", user);
       props.history.push("/");
 
-      //clear form
+      //clear form?
     } catch (e) {
-      console.log(e);
+      console.log("Something went wrong! ", e.message);
     }
-  };
-  const handleLogout = () => {
-    window.localStorage.removeItem("loggedBlogAppUser");
-    props.setUser(null);
-    //clear form
-    console.log(`${props.user.username} logged out`);
   };
 
   return (
@@ -56,14 +50,6 @@ const Login = props => {
           login
         </button>
       </form>
-      {props.user !== null ? (
-        <p>
-          {props.user.name} {props.user.username} is logged in
-          <button onClick={() => handleLogout()}>Logout!</button>
-        </p>
-      ) : (
-        ""
-      )}
     </div>
   );
 };

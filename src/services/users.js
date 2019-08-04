@@ -21,7 +21,7 @@ const updateUser = async userToUpdate => {
   console.log("response.data", response.data);
   return response.data;
 };
-
+//input -> name, username, password
 const createUser = async newUser => {
   const response = await axios.post(baseUrl, newUser);
   return response.data;

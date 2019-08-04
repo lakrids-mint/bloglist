@@ -31,8 +31,7 @@ const Blogs = props => {
     </div>
   );
 };
-//
-//
+
 const mapStateToProps = state => {
   return {
     blogs: state.blogs

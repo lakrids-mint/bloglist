@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { initializeBlogs } from "./reducers/blogsReducer";
 import { setUser, initUser } from "./reducers/userReducer";
+import { initUsers } from "./reducers/usersReducer";
 
 import Menu from "./components/Menu";
 import Login from "./components/Login";
@@ -15,12 +16,17 @@ import UserView from "./views/UserView";
 import BlogsView from "./views/BlogsView";
 import Blog from "./components/Blog";
 import Home from "./views/Home";
+import User from "./views/User";
 
 const App = props => {
   console.log("get state user from app", props);
 
   useEffect(() => {
     props.initializeBlogs();
+  }, []);
+
+  useEffect(() => {
+    props.initUsers();
   }, []);
 
   //Gets user from localstorage if
@@ -31,6 +37,9 @@ const App = props => {
     props.blogs.find(blog => blog.id === Number(id));
   };
 
+  const userById = id => {
+    props.users.find(user => user.id === Number(id));
+  };
   return (
     <div className="App">
       <BrowserRouter>
@@ -38,6 +47,11 @@ const App = props => {
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route path="/users" render={() => <UserView />} />
+          <Route
+            exact
+            path="/users/:id"
+            render={({ match }) => <User user={userById(match.params.id)} />}
+          />
           <Route path="/blogs" render={() => <BlogsView />} />
           <Route
             exact
@@ -57,13 +71,15 @@ const App = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    blogs: state.blogs
+    blogs: state.blogs,
+    users: state.users
   };
 };
 const mapDispatchToProps = {
   initializeBlogs,
   setUser,
-  initUser
+  initUser,
+  initUsers
 };
 export default connect(
   mapStateToProps,

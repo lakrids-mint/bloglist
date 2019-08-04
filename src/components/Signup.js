@@ -1,29 +1,41 @@
 import React from "react";
 //import PropTypes from "prop-types";
 import { useField } from "../hooks/index";
+import userservice from "../services/users";
 
 const Signup = () => {
   const username = useField("text");
   const name = useField("text");
   const password = useField("password");
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log("user signed up", name, username, password);
+    const newUser = {
+      name: e.target.name.value,
+      username: e.target.username.value,
+      password: e.target.password.value
+    };
+    try {
+      await userservice.createUser(newUser);
+      console.log("thanked you for signing up for our services");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="container">
       <div>
-        username
-        <input {...username} />
+        Name
+        <input name="name" {...username} />
       </div>
       <div>
         <div>
-          Name
-          <input {...username} />
+          Username
+          <input name="username" {...name} />
         </div>
-        password
-        <input {...password} />
+        Password
+        <input name="password" {...password} />
       </div>
       <button type="submit">Sign up</button>
     </form>
