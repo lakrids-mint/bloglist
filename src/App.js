@@ -76,7 +76,6 @@ const App = props => {
 
           <Route path="/login" render={() => <Login />} />
         </Switch>
-        <FooterComponent />
       </BrowserRouter>
     </div>
   );

@@ -2,8 +2,10 @@ import React from "react";
 //import PropTypes from "prop-types";
 import { useField } from "../hooks/index";
 import userservice from "../services/users";
+import { notificationChange } from "../reducers/notificationReducer";
+import { connect } from "react-redux";
 
-const Signup = () => {
+const Signup = props => {
   const username = useField("text");
   const name = useField("text");
   const password = useField("password");
@@ -16,9 +18,14 @@ const Signup = () => {
       password: e.target.password.value
     };
     try {
-      await userservice.createUser(newUser);
-      console.log("thanked you for signing up for our services");
+      const user = await userservice.createUser(newUser);
+      props.notificationChange(
+        `${user.name}, thank you for signing up for our services!`
+      );
+      setTimeout(() => props.notificationChange(""), 6000);
     } catch (e) {
+      props.notificationChange(`${e.message}!`);
+      setTimeout(() => props.notificationChange(""), 6000);
       console.log(e);
     }
   };
@@ -46,5 +53,7 @@ const Signup = () => {
   );
 };
 Signup.propTypes = {};
-
-export default Signup;
+export default connect(
+  null,
+  { notificationChange }
+)(Signup);

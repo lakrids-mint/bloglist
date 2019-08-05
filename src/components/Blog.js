@@ -4,6 +4,11 @@ import { connect } from "react-redux";
 
 const Blog = props => {
   const blog = props.blog;
+  const findUserByBlogId = blogId => {
+    //go through list of users and for each user go through the blogs they added and compare to id, if theres a match return user(not the matching id)
+    //  console.log("users", props.users);
+  };
+  findUserByBlogId(77);
   const submitComment = e => {
     e.preventDefault();
     console.log(e.target.comment.value);
@@ -17,7 +22,6 @@ const Blog = props => {
   if (blog === undefined) {
     return <p>loading...</p>;
   }
-  console.log(blog);
   return (
     <div>
       <h1>{blog.title}</h1>
@@ -46,8 +50,12 @@ const Blog = props => {
 const mapDispatchToProps = {
   addComment
 };
-
+const mapStateToProps = state => {
+  return {
+    users: state.users
+  };
+};
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Blog);
