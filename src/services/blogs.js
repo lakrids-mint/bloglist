@@ -10,6 +10,7 @@ const setToken = newToken => {
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
+  console.log("getall", response.data);
   return response.data;
 };
 
@@ -39,4 +40,23 @@ const create = async newObject => {
   const response = await axios.post(baseUrl, newObject, config);
   return response.data;
 };
-export default { getAll, create, setToken, deleteBlog, updateLike };
+//add comment
+const updateComment = async (comment, blogToComment) => {
+  console.log("add comment service:", comment);
+  console.log("blogto comment.id", blogToComment.id);
+  const response = await axios.put(
+    `${baseUrl}/${blogToComment.id}/comments`,
+    comment
+  );
+  console.log("response.data from server", response.data);
+  return response.data;
+};
+
+export default {
+  getAll,
+  create,
+  setToken,
+  deleteBlog,
+  updateLike,
+  updateComment
+};

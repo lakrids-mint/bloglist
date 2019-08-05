@@ -1,6 +1,19 @@
 import React from "react";
+import { addComment } from "../reducers/blogsReducer";
+import { connect } from "react-redux";
 
-const Blog = ({ blog }) => {
+const Blog = props => {
+  const blog = props.blog;
+  const submitComment = e => {
+    e.preventDefault();
+    console.log(e.target.comment.value);
+    const comment = {
+      comment: e.target.comment.value
+    };
+    props.addComment(comment, blog);
+    //some input validation
+    //call to action creator which calls blogservice
+  };
   if (blog === undefined) {
     return <p>loading...</p>;
   }
@@ -11,10 +24,30 @@ const Blog = ({ blog }) => {
       <p>by {blog.author}</p>
       <p>added by ...(display user) plus ability to like</p>
       <p>{blog.likes} likes</p>
-      <a target="_blank" href={`http://${blog.url}`}>
+      <a rel="noopener noreferrer" target="_blank" href={`http://${blog.url}`}>
         {blog.url}
       </a>
+      <h2>Comments</h2>
+      <form onSubmit={submitComment}>
+        <input name="comment" />
+        <button className="btn" type="submit">
+          add comment
+        </button>
+      </form>
+      <ul>
+        {blog.comments.map(comment => (
+          <li key={comment._id}>{comment.comment}</li>
+        ))}
+      </ul>
     </div>
   );
 };
-export default Blog;
+
+const mapDispatchToProps = {
+  addComment
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Blog);

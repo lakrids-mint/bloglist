@@ -17,6 +17,12 @@ const blogsReducer = (state = [], action) => {
       return state.map(blog =>
         blog.id !== updatedBlog.id ? blog : updatedBlog
       );
+    case "ADD_COMMENT":
+      console.log("add comment", action.data);
+      const updatedBlogComment = action.data;
+      return state.map(blog =>
+        blog.id !== updatedBlogComment.id ? blog : updatedBlogComment
+      );
     default:
       return state;
   }
@@ -68,6 +74,18 @@ export const updateLike = blog => {
     dispatch({
       type: "UPVOTE_BLOG",
       data: updatedBlog
+    });
+  };
+};
+
+export const addComment = (comment, blog) => {
+  console.log("action creator", comment, "blog to add comment to: ", blog);
+  return async dispatch => {
+    const blogToComment = await blogService.updateComment(comment, blog);
+    console.log("updating comments...new blog:", blogToComment);
+    dispatch({
+      type: "ADD_COMMENT",
+      data: blogToComment
     });
   };
 };

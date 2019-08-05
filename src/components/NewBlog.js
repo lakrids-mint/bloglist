@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createBlog } from "../reducers/blogsReducer";
+import { notificationChange } from "../reducers/notificationReducer";
 import Togglable from "../components/Togglable";
 
 /* NB: Using uncontrolled form here
@@ -20,14 +21,19 @@ const NewBlog = props => {
       url: event.target.url.value,
       likes: 0
     };
-    props.createBlog(blogObject);
-
-    //clear form
-    event.target.title.value = "";
-    event.target.author.value = "";
-    event.target.url.value = "";
-
-    blogFormRef.current.toggleVisibility();
+    try {
+      await props.createBlog(blogObject);
+      props.notificationChange(`${blogObject.title} was created`);
+      setTimeout(() => props.notificationChange(""), 4000);
+    } catch (e) {
+      props.notificationChange(`${e.message}!`);
+      setTimeout(() => props.notificationChange(""), 6000);
+    } finally {
+      blogFormRef.current.toggleVisibility();
+      /* event.target.title.value = "";
+      event.target.author.value = "";
+      event.target.url.value = ""; */
+    }
   };
 
   return (
@@ -58,5 +64,5 @@ const NewBlog = props => {
 
 export default connect(
   null,
-  { createBlog }
+  { createBlog, notificationChange }
 )(NewBlog);

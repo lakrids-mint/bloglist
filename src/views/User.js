@@ -13,7 +13,7 @@ const User = ({ user }) => {
       <ul>
         {user.blogs.map(blog => (
           <li key={blog.id}>
-            <span>{blog.title}---></span>
+            <span>{blog.title}</span>
             <span>Likes: {blog.likes}</span>
           </li>
         ))}

@@ -1,19 +1,20 @@
-const initialState = "";
-
-const notificationReducer = (state = initialState, action) => {
+const notificationReducer = (state = "", action) => {
   switch (action.type) {
     case "SET_NOTIFICATION":
-      return action.notification;
+      console.log("notification");
+      return action.data;
     default:
       return state;
   }
 };
 //action creator
 export const notificationChange = notification => {
-  return {
-    type: "SET_NOTIFICATION",
-    notification
+  console.log("note: ", notification);
+  return dispatch => {
+    dispatch({
+      type: "SET_NOTIFICATION",
+      data: notification
+    });
   };
 };
-
 export default notificationReducer;

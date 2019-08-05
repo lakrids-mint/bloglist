@@ -7,6 +7,7 @@ import { setUser, initUser } from "./reducers/userReducer";
 import { initUsers } from "./reducers/usersReducer";
 
 import Menu from "./components/Menu";
+import Notification from "./components/Notification";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 
@@ -17,6 +18,7 @@ import BlogsView from "./views/BlogsView";
 import Blog from "./components/Blog";
 import Home from "./views/Home";
 import User from "./views/User";
+import FooterComponent from "./views/FooterComponent";
 
 const App = props => {
   console.log("get state user from app", props);
@@ -54,6 +56,7 @@ const App = props => {
     <div className="App">
       <BrowserRouter>
         <Menu />
+        <Notification notification={props.notification} />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/users" render={() => <UserView />} />
@@ -73,6 +76,7 @@ const App = props => {
 
           <Route path="/login" render={() => <Login />} />
         </Switch>
+        <FooterComponent />
       </BrowserRouter>
     </div>
   );
@@ -82,7 +86,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     blogs: state.blogs,
-    users: state.users
+    users: state.users,
+    notification: state.notification
   };
 };
 const mapDispatchToProps = {
