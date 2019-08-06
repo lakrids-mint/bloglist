@@ -10,15 +10,12 @@ import Menu from "./components/Menu";
 import Notification from "./components/Notification";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-
 import Signup from "./components/Signup";
-
 import UserView from "./views/UserView";
 import BlogsView from "./views/BlogsView";
 import Blog from "./components/Blog";
 import Home from "./views/Home";
 import User from "./views/User";
-import FooterComponent from "./views/FooterComponent";
 
 const App = props => {
   console.log("get state user from app", props);
@@ -31,15 +28,14 @@ const App = props => {
     props.initUsers();
   }, []);
 
-  //Gets user from localstorage if
+  //Gets user from localstorage if there
   useEffect(() => {
     props.initUser();
   }, []);
 
-  //helper methods
+  //helper methods -> make into one method
   const blogById = blogid => {
     const blog = props.blogs.find(blog => blog.id === blogid);
-    console.log(blog);
     return blog;
   };
 
@@ -48,15 +44,11 @@ const App = props => {
     return user;
   };
 
-  /* const findUserByBlogId = blogId => {
-    return user;
-  };
- */
   return (
     <div className="App">
       <BrowserRouter>
-        <Menu />
-        <Notification notification={props.notification} />
+        <Menu user={props.user} />
+        <Notification />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/users" render={() => <UserView />} />
@@ -73,7 +65,6 @@ const App = props => {
           />
           <Route path="/signup" render={() => <Signup />} />
           <Route path="/logout" render={() => <Logout />} />
-
           <Route path="/login" render={() => <Login />} />
         </Switch>
       </BrowserRouter>
@@ -89,12 +80,14 @@ const mapStateToProps = state => {
     notification: state.notification
   };
 };
+
 const mapDispatchToProps = {
   initializeBlogs,
   setUser,
   initUser,
   initUsers
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

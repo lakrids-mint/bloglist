@@ -2,27 +2,30 @@ import blogService from "../services/blogs";
 
 const blogsReducer = (state = [], action) => {
   switch (action.type) {
-    case "INIT_BLOGS":
+    case "INIT_BLOGS": {
       return action.data;
-    case "NEW_BLOG":
+    }
+    case "NEW_BLOG": {
       console.log("create blog");
       return state.concat(action.data);
-    case "DELETE_BLOG":
-      console.log("delete blog from reducer");
+    }
+    case "DELETE_BLOG": {
       const deleteBlogId = action.data;
       return state.filter(blog => blog.id !== deleteBlogId);
-    case "UPVOTE_BLOG":
-      console.log("take my upvote", action.data);
+    }
+    case "UPVOTE_BLOG": {
       const updatedBlog = action.data;
       return state.map(blog =>
         blog.id !== updatedBlog.id ? blog : updatedBlog
       );
-    case "ADD_COMMENT":
+    }
+    case "ADD_COMMENT": {
       console.log("add comment", action.data);
       const updatedBlogComment = action.data;
       return state.map(blog =>
         blog.id !== updatedBlogComment.id ? blog : updatedBlogComment
       );
+    }
     default:
       return state;
   }

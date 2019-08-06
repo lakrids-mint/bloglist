@@ -33,7 +33,7 @@ const Signup = props => {
   return (
     <div className="container">
       <h1 className="center">Sign up for our wonderful service </h1>
-      <h3 className="center">- it is almost free!</h3>
+      <h3 className="center">- sort of free!</h3>
       <form onSubmit={handleSubmit} className="container">
         <div>
           Name
@@ -52,7 +52,9 @@ const Signup = props => {
     </div>
   );
 };
+
 Signup.propTypes = {};
+
 export default connect(
   null,
   { notificationChange }

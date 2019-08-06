@@ -12,7 +12,7 @@ const Logout = props => {
     console.log(`${props.user.username} logged out`);
   };
   handleLogout();
-  props.history.push("/");
+  props.history.push("/login");
   //handle logout
   //notify of logout
   //redirect

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const SignedInLinks = ({ user }) => {
   return (
-    <ul className="right">
+    <>
       <li>
         <NavLink to="/blogs">Blogs</NavLink>
       </li>
@@ -18,7 +18,7 @@ const SignedInLinks = ({ user }) => {
           {user !== null ? `${user.username} has logged in` : ""}
         </NavLink>
       </li>
-    </ul>
+    </>
   );
 };
 

@@ -10,7 +10,6 @@ const Blogs = props => {
         {props.blogs.map(blog => (
           <li key={blog.id}>
             <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-
             <button
               className="btn btn-small"
               onClick={() => props.updateLike(blog)}
@@ -22,7 +21,7 @@ const Blogs = props => {
               className="btn btn-small"
               onClick={() => props.deleteBlog(blog.id)}
             >
-              Delete
+              <i className="material-icons">delete</i>
             </button>
           </li>
         ))}

@@ -24,6 +24,7 @@ const updateLike = async blogToUpdate => {
     ...blogToUpdate,
     likes: blogToUpdate.likes + 1
   };
+
   const response = await axios.put(
     `${baseUrl}/${blogToUpdate.id}`,
     newBlogObject
@@ -40,7 +41,8 @@ const create = async newObject => {
   const response = await axios.post(baseUrl, newObject, config);
   return response.data;
 };
-//add comment
+
+//add comment - comments are a subdocument of each indiviual blog object
 const updateComment = async (comment, blogToComment) => {
   console.log("add comment service:", comment);
   console.log("blogto comment.id", blogToComment.id);

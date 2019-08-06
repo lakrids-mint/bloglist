@@ -54,7 +54,7 @@ const NewBlog = props => {
             <input name="url" />
           </div>
           <div>
-            <input type="submit" value="Create" />
+            <input className="btn" type="submit" value="Create" />
           </div>
         </form>
       </div>

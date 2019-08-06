@@ -15,18 +15,24 @@ const Togglable = React.forwardRef((props, ref) => {
       toggleVisibility
     };
   });
+
   return (
     <div>
       <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+        <button className="btn" onClick={toggleVisibility}>
+          {props.buttonLabel}
+        </button>
       </div>
       <div style={showWhenVisible} className="togglableContent">
         {props.children}
-        <button onClick={toggleVisibility}>cancel</button>
+        <button className="btn" onClick={toggleVisibility}>
+          cancel
+        </button>
       </div>
     </div>
   );
 });
+
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
 };

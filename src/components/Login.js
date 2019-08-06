@@ -1,15 +1,15 @@
 import React from "react";
-import { useField } from "../hooks/index";
 import { connect } from "react-redux";
-import { setUser } from "../reducers/userReducer";
-
 import { withRouter } from "react-router-dom";
+import { useField } from "../hooks/index";
+
+import { setUser } from "../reducers/userReducer";
+import { notificationChange } from "../reducers/notificationReducer";
+
 import loginService from "../services/login";
 import blogService from "../services/blogs";
-import store from "../store";
 
 const Login = props => {
-  console.log("props", props);
   const username = useField("text");
   const password = useField("password");
 
@@ -24,12 +24,11 @@ const Login = props => {
       window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user));
       console.log(user.name, "logged in");
       props.setUser(user);
-      console.log("user: ", store.getState().user);
-      console.log("user", user);
       props.history.push("/");
-
       //clear form?
     } catch (e) {
+      props.notificationChange("Something went wrong: ", e.message);
+      setTimeout(() => props.notificationChange(""), 4000);
       console.log("Something went wrong! ", e.message);
     }
   };
@@ -53,13 +52,16 @@ const Login = props => {
     </div>
   );
 };
+
 const mapStateToProps = state => {
   return {
     user: state.user
   };
 };
+
 const mapDispatchToProps = {
-  setUser
+  setUser,
+  notificationChange
 };
 
 export default withRouter(
