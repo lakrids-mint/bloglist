@@ -1,9 +1,13 @@
 import React from "react";
-import { addComment } from "../reducers/blogsReducer";
+import { addComment, updateLike } from "../reducers/blogsReducer";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
+import Togglable from "../components/Togglable";
 
 const Blog = props => {
   const blog = props.blog;
+  const blogFormRef = React.createRef();
 
   const findUserByBlogId = () => {
     //go through list of users and for each user go through the blogs they added and compare to id, if theres a match return user(not the matching id)
@@ -26,32 +30,62 @@ const Blog = props => {
     return <p>loading...</p>;
   }
   return (
-    <div>
-      <h1>{blog.title}</h1>
-      <p>by {blog.author}</p>
-      <p>added by ...(display user) plus ability to like</p>
-      <p>{blog.likes} likes</p>
-      <a rel="noopener noreferrer" target="_blank" href={`http://${blog.url}`}>
-        {blog.url}
-      </a>
-      <h2>Comments</h2>
-      <form onSubmit={submitComment}>
-        <input name="comment" />
-        <button className="btn" type="submit">
-          add comment
-        </button>
-      </form>
-      <ul>
-        {blog.comments.map(comment => (
-          <li key={comment._id}>{comment.comment}</li>
-        ))}
-      </ul>
+    <div className="container section">
+      <div className="row">
+        <div className="col s12 m10">
+          <h1>{blog.title}</h1>
+          <p>by {blog.author}</p>
+          <span> added by </span>
+
+          <Link to={`/users/${blog.user.id}`}>{blog.user.username}</Link>
+
+          <div className="row">
+            <div className="col">
+              <button
+                className="btn pink"
+                onClick={() => props.updateLike(blog)}
+              >
+                {blog.likes} <i className="material-icons right">thumb_up</i>
+              </button>
+
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href={`http://${blog.url}`}
+                className="btn pink"
+              >
+                Read it here!
+              </a>
+            </div>
+          </div>
+
+          <ul className="collection with-header">
+            <li className="collection-header">
+              <h4>Comments</h4>
+            </li>
+            {blog.comments.map(comment => (
+              <li className="collection-item" key={comment._id}>
+                {comment.comment}
+              </li>
+            ))}
+          </ul>
+          <Togglable buttonLabel="Add comment" ref={blogFormRef}>
+            <form onSubmit={submitComment}>
+              <input name="comment" />
+              <button className="btn" type="submit">
+                add comment
+              </button>
+            </form>
+          </Togglable>
+        </div>
+      </div>
     </div>
   );
 };
 
 const mapDispatchToProps = {
-  addComment
+  addComment,
+  updateLike
 };
 
 const mapStateToProps = state => {

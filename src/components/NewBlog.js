@@ -38,25 +38,27 @@ const NewBlog = props => {
 
   return (
     <Togglable buttonLabel="New blog" ref={blogFormRef}>
-      <div>
-        <h2>Create new blog</h2>
-        <form onSubmit={addBlog}>
-          <div>
-            Title
-            <input name="title" />
-          </div>
-          <div>
-            Author
-            <input name="author" />
-          </div>
-          <div>
-            Url
-            <input name="url" />
-          </div>
-          <div>
-            <input className="btn" type="submit" value="Create" />
-          </div>
-        </form>
+      <h2>Create new blog</h2>
+      <div className="row ">
+        <div className="col s12">
+          <form onSubmit={addBlog}>
+            <div className="input-field">
+              Title
+              <input name="title" />
+            </div>
+            <div className="input-field">
+              Author
+              <input name="author" />
+            </div>
+            <div className="input-field">
+              Url
+              <input id="url" name="url" />
+            </div>
+            <div>
+              <input className="btn" type="submit" value="Create" />
+            </div>
+          </form>
+        </div>
       </div>
     </Togglable>
   );

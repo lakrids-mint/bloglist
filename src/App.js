@@ -68,6 +68,7 @@ const App = props => {
           <Route path="/login" render={() => <Login />} />
         </Switch>
       </BrowserRouter>
+      <div height="200" />
     </div>
   );
 };

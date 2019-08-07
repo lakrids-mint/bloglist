@@ -6,10 +6,14 @@ import Blogs from "../components/Blogs";
 
 const Home = () => {
   return (
-    <div className="container">
-      <h1>Blog app</h1>
-      <NewBlog />
-      <Blogs />
+    <div className="container section">
+      <div className="row">
+        <div className="col s12 m10">
+          <h1>Blog app</h1>
+          <NewBlog />
+          <Blogs />
+        </div>
+      </div>
     </div>
   );
 };

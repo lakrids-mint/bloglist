@@ -34,21 +34,25 @@ const Login = props => {
   };
 
   return (
-    <div className="container">
-      <h1>login</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input {...username} />
+    <div className="container section">
+      <div className="row">
+        <div className="col s12 m10">
+          <h1>Log in</h1>
+          <form onSubmit={handleLogin}>
+            <div>
+              username
+              <input {...username} />
+            </div>
+            <div>
+              password
+              <input {...password} />
+            </div>
+            <button className="btn" type="submit">
+              login
+            </button>
+          </form>
         </div>
-        <div>
-          password
-          <input {...password} />
-        </div>
-        <button className="btn" type="submit">
-          login
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

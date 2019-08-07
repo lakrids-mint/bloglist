@@ -15,7 +15,7 @@ const SignedInLinks = ({ user }) => {
       </li>
       <li>
         <NavLink to="/">
-          {user !== null ? `${user.username} has logged in` : ""}
+          {user !== null ? `Hello, ${user.username}` : ""}
         </NavLink>
       </li>
     </>

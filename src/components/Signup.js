@@ -31,24 +31,30 @@ const Signup = props => {
   };
 
   return (
-    <div className="container">
-      <h1 className="center">Sign up for our wonderful service </h1>
-      <h3 className="center">- sort of free!</h3>
-      <form onSubmit={handleSubmit} className="container">
-        <div>
-          Name
-          <input name="name" {...username} />
+    <div className="container section">
+      <div className="row">
+        <div className="col s12 m10">
+          <h1>Sign up for our wonderful service </h1>
+          <h3>- almost free!</h3>
+          <form onSubmit={handleSubmit}>
+            <div>
+              Name
+              <input name="name" {...username} />
+            </div>
+            <div>
+              <div>
+                Username
+                <input name="username" {...name} />
+              </div>
+              Password
+              <input name="password" {...password} />
+            </div>
+            <button className="btn" type="submit">
+              Sign up
+            </button>
+          </form>
         </div>
-        <div>
-          <div>
-            Username
-            <input name="username" {...name} />
-          </div>
-          Password
-          <input name="password" {...password} />
-        </div>
-        <button type="submit">Sign up</button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import SignedOutLinks from "./SignedOutLinks";
 
 const Menu = ({ user }) => {
   return (
-    <nav className="nav-wrapper grey darken-1">
+    <nav className="nav-wrapper red lighten-2">
       <div className="container">
         <Link to="/" className="brand-logo left">
           Bloglist

@@ -6,22 +6,22 @@ import { deleteBlog, updateLike } from "../reducers/blogsReducer";
 const Blogs = props => {
   return (
     <div>
-      <ul>
+      <ul className="collection">
         {props.blogs.map(blog => (
-          <li key={blog.id}>
+          <li className="collection-item" key={blog.id}>
             <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
             <button
-              className="btn btn-small"
+              className="btn btn-small secondary-content valign-wrapper pink"
+              onClick={() => props.deleteBlog(blog.id)}
+            >
+              <i className="material-icons">delete</i>
+            </button>
+            <button
+              className="btn btn-small secondary-content valign-wrapper pink"
               onClick={() => props.updateLike(blog)}
             >
               {blog.likes}
               <i className="material-icons right">thumb_up</i>
-            </button>
-            <button
-              className="btn btn-small"
-              onClick={() => props.deleteBlog(blog.id)}
-            >
-              <i className="material-icons">delete</i>
             </button>
           </li>
         ))}
