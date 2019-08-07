@@ -33,12 +33,10 @@ const Blog = props => {
     <div className="container section">
       <div className="row">
         <div className="col s12 m10">
-          <h1>{blog.title}</h1>
+          <h3>{blog.title}</h3>
           <p>by {blog.author}</p>
           <span> added by </span>
-
           <Link to={`/users/${blog.user.id}`}>{blog.user.username}</Link>
-
           <div className="row">
             <div className="col">
               <button
@@ -47,7 +45,6 @@ const Blog = props => {
               >
                 {blog.likes} <i className="material-icons right">thumb_up</i>
               </button>
-
               <a
                 rel="noopener noreferrer"
                 target="_blank"
@@ -62,6 +59,7 @@ const Blog = props => {
           <ul className="collection with-header">
             <li className="collection-header">
               <h4>Comments</h4>
+              <h6>All comments are anonymous</h6>
             </li>
             {blog.comments.map(comment => (
               <li className="collection-item" key={comment._id}>
